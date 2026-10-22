@@ -32,6 +32,7 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | sent | mailto | error
+  const [composeUrl, setComposeUrl] = useState('');
   const submitRef = useMagnetic(0.2);
 
   const onChange = (e) => {
@@ -62,8 +63,16 @@ export default function Contact() {
       const body = encodeURIComponent(`${values.message}\n\n— ${values.name}\n${values.email}`);
       if (useGmail) {
         const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${body}`;
-        const win = window.open(url, '_blank', 'noopener,noreferrer');
-        if (!win) window.location.href = `mailto:${email}?subject=${subject}&body=${body}`; // popup blocked
+        // A real anchor click opens a new tab reliably from the user's gesture
+        // (window.open with "noopener" returns null in Chrome, which looks like a blocked popup).
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setComposeUrl(url);
       } else {
         window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
       }
@@ -162,14 +171,6 @@ export default function Contact() {
 
           <Reveal className="contact__form-wrap" delay={0.2} amount={0.15}>
             <form className="contact__form" onSubmit={onSubmit} noValidate>
-              <p className="contact__mode mono">
-                {hasEndpoint
-                  ? 'Sends directly from this page.'
-                  : useGmail
-                    ? 'Opens Gmail in a new tab with the message pre-filled — nothing is stored here.'
-                    : 'Opens your email app with the message pre-filled — nothing is stored here.'}
-              </p>
-
               {field('name', 'Your name')}
               {field('email', 'Email', 'email', { inputMode: 'email' })}
               {field('message', 'Project, idea or hello', 'textarea', { rows: 5 })}
@@ -194,11 +195,28 @@ export default function Contact() {
                   )}
                   {status === 'mailto' && (
                     <span className="contact__status-ok">
-                      <Check size={16} aria-hidden="true" /> {useGmail ? 'Gmail should have opened in a new tab.' : 'Your email app should have opened.'} If not, write to{' '}
-                      <a href={`mailto:${email}`} className="link-line">
-                        {email}
-                      </a>
-                      .
+                      <Check size={16} aria-hidden="true" />
+                      {useGmail ? (
+                        <>
+                          Gmail opened in a new tab. If it didn’t,{' '}
+                          <a href={composeUrl} target="_blank" rel="noopener noreferrer" className="link-line">
+                            open it here
+                          </a>{' '}
+                          or write to{' '}
+                          <a href={`mailto:${email}`} className="link-line">
+                            {email}
+                          </a>
+                          .
+                        </>
+                      ) : (
+                        <>
+                          Your email app should have opened. If not, write to{' '}
+                          <a href={`mailto:${email}`} className="link-line">
+                            {email}
+                          </a>
+                          .
+                        </>
+                      )}
                     </span>
                   )}
                   {status === 'error' && (
