@@ -54,7 +54,6 @@ Everything personal lives in **`src/data/siteConfig.js`**:
 
 - `availability` — the hero label (`status`, `label`, `note`). It is manual; nothing on the site detects availability.
 - `links.linkedin` — set the real profile URL (or `null` to hide the link everywhere).
-- `contact.formEndpoint` — see *Contact form* below.
 - `portrait` — add `portrait: '/images/portrait.jpg'` to show a photo in the About section instead of the abstract composition.
 - `experience`, `education`, `skillGroups`, `process`, hero and contact copy.
 
@@ -78,10 +77,9 @@ When a project becomes real work, set `concept: false` and remove `conceptNote` 
 
 Available artwork variants: `monogram`, `marks`, `palette`, `menu`, `social`, `phone`, `flow`, `wireframe`, `system`, `desktop`, `ia`, `poster`, `typegrid`, `shapes`, `responsive`. Schemes: `ivory`, `ink`, `cobalt`, `orange`.
 
-## Contact form (honest by design)
+## Contact
 
-- With `contact.formEndpoint = null` (default) the form validates input, then composes the email for the visitor with everything pre-filled. `contact.fallback` picks how: `'gmail'` (default) opens Gmail's compose screen in a new tab; `'mailto'` opens the default email app. If a popup blocker stops the Gmail tab, it falls back to `mailto:`. The UI says which happens.
-- Set `contact.formEndpoint` to a Formspree / Basin / Getform endpoint (e.g. `https://formspree.io/f/xxxx`) and the form POSTs JSON `{ name, email, message }` and shows real success/error states.
+There is no contact form. The contact section links directly to the email address, Behance and LinkedIn from `siteConfig.js`, so nothing is faked or stored.
 
 ## Fonts
 
@@ -92,7 +90,7 @@ Fonts load from Google Fonts in `index.html`. To self-host, put the files in `pu
 - Honors `prefers-reduced-motion`: the preloader, split-text, parallax, pinned horizontal gallery, cursor and magnetic effects all fall back to static or simple fades.
 - Custom cursor and magnetic buttons only run on fine-pointer devices.
 - Horizontal gallery only pins on desktop (≥1024px + mouse); tablets/phones get a vertical editorial list.
-- Semantic landmarks, skip link, visible focus states, accessible tablist (skills), disclosure buttons (process), form errors wired with `aria-describedby`.
+- Semantic landmarks, skip link, visible focus states, accessible tablist (skills), disclosure buttons (process).
 
 ## SEO
 

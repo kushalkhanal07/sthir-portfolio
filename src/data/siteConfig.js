@@ -37,21 +37,6 @@ export const siteConfig = {
     note: 'Freelance & full-time',
   },
 
-  /**
-   * Contact form behaviour.
-   * - If `formEndpoint` is a URL (e.g. a Formspree / Basin / Getform endpoint),
-   *   the form POSTs JSON there.
-   * - If it is `null`, the form falls back to composing the email for the
-   *   visitor with everything pre-filled. The UI says so clearly.
-   *   fallback: 'gmail'  → opens Gmail's compose screen in a new tab
-   *             'mailto' → opens the visitor's default email app
-   */
-  contact: {
-    formEndpoint: null,
-    fallback: 'gmail',
-    subjectPrefix: '[Portfolio] ',
-  },
-
   hero: {
     headline: ['DESIGN', 'THAT', 'MAKES', 'YOU FEEL.'],
     intro:

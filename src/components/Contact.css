@@ -17,6 +17,7 @@
 .contact__grid {
   display: grid;
   grid-template-columns: 7fr 5fr;
+  align-items: end;
   gap: var(--space-5);
   align-items: start;
 }
@@ -89,125 +90,9 @@
   font-size: 0.66rem;
 }
 
-/* ---------- Form ---------- */
-.contact__form {
-  display: grid;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: rgba(244, 240, 232, 0.03);
-}
-.contact__mode {
-  font-size: 0.66rem;
-  color: var(--muted);
-  line-height: 1.6;
-}
-.field {
-  position: relative;
-  display: grid;
-  gap: 0.5rem;
-}
-.field__label {
-  font-size: 0.66rem;
-  color: var(--muted);
-}
-.field__input {
-  width: 100%;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--line-strong);
-  padding: 0.6rem 0;
-  color: var(--ivory);
-  font-size: var(--step-0);
-  resize: vertical;
-  border-radius: 0;
-  transition: border-color var(--dur-fast) var(--ease-out);
-}
-.field__input::placeholder {
-  color: var(--muted);
-}
-/* keep browser autofill from painting the field white on the dark panel */
-.field__input:-webkit-autofill,
-.field__input:-webkit-autofill:hover,
-.field__input:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--ivory);
-  -webkit-box-shadow: 0 0 0 1000px var(--ink) inset;
-  box-shadow: 0 0 0 1000px var(--ink) inset;
-  caret-color: var(--ivory);
-  transition: background-color 9999s ease-in-out 0s;
-}
-.field__line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--orange);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur-base) var(--ease-out);
-  pointer-events: none;
-}
-.field:has(.field__error) .field__line {
-  bottom: 1.6rem;
-}
-.field__input:focus ~ .field__line {
-  transform: scaleX(1);
-}
-.field__input:focus-visible {
-  outline: none;
-}
-.field.is-invalid .field__input {
-  border-bottom-color: var(--orange);
-}
-.field__error {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.78rem;
-  color: var(--orange);
-}
-.field--hp {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.contact__actions {
-  display: grid;
-  gap: 1rem;
-  align-items: center;
-}
-.contact__actions .btn[disabled] {
-  opacity: 0.6;
-  cursor: progress;
-}
-.contact__status {
-  font-size: var(--step--1);
-  min-height: 1.4em;
-}
-.contact__status-ok,
-.contact__status-err {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem;
-}
-.contact__status-ok {
-  color: #7fe0a6;
-}
-.contact__status-err {
-  color: var(--orange);
-}
-
 @media (max-width: 900px) {
   .contact__grid {
     grid-template-columns: 1fr;
     gap: var(--space-4);
-  }
-  .contact__form {
-    padding: var(--space-3);
   }
 }
