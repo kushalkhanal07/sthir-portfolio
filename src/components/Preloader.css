@@ -1,0 +1,58 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: var(--ink);
+  color: var(--ivory);
+  display: grid;
+  place-items: center;
+  will-change: clip-path;
+}
+
+.preloader__inner {
+  width: 100%;
+  padding: var(--gutter);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.preloader__meta,
+.preloader__roles {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: rgba(244, 240, 232, 0.55);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+
+.preloader__name {
+  font-size: var(--step-5);
+  line-height: 0.9;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.3em;
+}
+
+.preloader__word {
+  display: inline-flex;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.preloader__char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.preloader__bar {
+  height: 1px;
+  background: rgba(244, 240, 232, 0.18);
+  overflow: hidden;
+}
+.preloader__bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+  transform-origin: left;
+}
